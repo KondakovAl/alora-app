@@ -1,0 +1,161 @@
+/*variables*/
+@import '/src/assets/scss/core/variables';
+/*fonts*/
+@import '/src/assets/scss/core/fonts';
+/*components*/
+@import '/src/assets/scss/components/index';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+select {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: transparent;
+}
+
+#root {
+}
+
+body {
+  font-family: $font-stack-primary;
+  font-size: $font-size-primary;
+}
+
+.wrapper {
+  margin: 0 auto;
+}
+
+/*Section Header*/
+
+.header {
+  padding: 30px 10px;
+  &__wrapper {
+    max-width: 1350px;
+    display: flex;
+    align-items: center;
+  }
+  &__logo {
+    &-container {
+      margin-right: auto;
+    }
+  }
+  &__menu {
+    display: flex;
+    align-items: center;
+  }
+  &__navigation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 65px;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: $color-purple;
+      top: 17px;
+      right: -35px;
+    }
+    &-item {
+      position: relative;
+      padding: 10px 15px;
+      cursor: pointer;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 80%;
+        height: 1px;
+        background: $color-purple;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all 0.25s ease-in;
+      }
+      &:hover {
+        &::after {
+          width: 100%;
+          height: 2px;
+          bottom: 0;
+        }
+      }
+    }
+  }
+  &__contacts {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 65px;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: $color-purple;
+      top: 17px;
+      right: -35px;
+    }
+    &-item {
+      position: relative;
+      padding: 10px 15px;
+      cursor: pointer;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 85%;
+        height: 1px;
+        background: $color-purple;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all 0.25s ease-in;
+      }
+      &:hover {
+        &::after {
+          width: 100%;
+          height: 2px;
+          bottom: 0;
+        }
+      }
+    }
+  }
+  &__socials {
+    display: flex;
+    &-logo {
+      &-container {
+        display: flex;
+        padding: 10px 10px;
+        cursor: pointer;
+        & svg {
+          transition: fill 0.3s ease-in;
+        }
+        &:hover {
+          & svg {
+            fill: $color-purple;
+          }
+        }
+      }
+    }
+  }
+}
