@@ -40,6 +40,7 @@ select {
 body {
   font-family: $font-stack-primary;
   font-size: $font-size-primary;
+  background: $bg-color;
 }
 
 .wrapper {
@@ -157,5 +158,54 @@ body {
         }
       }
     }
+  }
+}
+
+/*Solutions Section*/
+
+.solutions {
+  padding: 120px 0;
+  &__wrapper {
+    max-width: 1200px;
+  }
+}
+
+/*Procedure Section*/
+
+.procedure {
+  padding: 120px 0;
+  background: $color-yellow;
+  &__wrapper {
+    max-width: 1200px;
+  }
+}
+
+/*About Section*/
+
+.about {
+  padding: 120px 0;
+  background: $bg-color-purple;
+  &__wrapper {
+    max-width: 1200px;
+  }
+}
+
+/*Questions Section*/
+
+.questions {
+  padding: 120px 0;
+  background: $bg-color;
+  &__wrapper {
+    max-width: 1200px;
+  }
+}
+
+/*Clients Section*/
+
+.clients {
+  padding: 120px 0;
+  background: $bg-color-purple;
+  &__wrapper {
+    max-width: 1200px;
   }
 }

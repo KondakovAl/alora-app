@@ -1,0 +1,108 @@
+.head {
+  display: flex;
+  &__title {
+    display: inline-block;
+    position: relative;
+    font-family: $font-stack-secondary;
+    font-size: $font-size-secondary;
+    line-height: $line-height-secondary;
+    text-transform: uppercase;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 11px;
+      right: -140px;
+      height: 2px;
+      width: 120px;
+      background: $color-purple_other;
+    }
+  }
+  &__subtitle {
+    font-family: $font-stack-tertiary;
+    font-size: $font-size-tertiary;
+    line-height: $line-height-tertiary;
+  }
+  &__description {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  &__link {
+    font-size: 18px;
+    line-height: 28px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: $primary-color;
+      bottom: 0%;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.25s ease-in;
+    }
+    &:hover {
+      &::after {
+        width: 110%;
+        height: 2px;
+        bottom: -15%;
+      }
+    }
+  }
+}
+
+.head {
+  &.--horizontal {
+    justify-content: space-between;
+    .head__container {
+      &:nth-child(1) {
+        max-width: 505px;
+      }
+      &:nth-child(2) {
+        max-width: 575px;
+      }
+    }
+    .head__title {
+      margin-bottom: 20px;
+    }
+    .head__description {
+      margin-bottom: 35px;
+    }
+  }
+  &.--vertical {
+    flex-direction: column;
+    max-width: 575px;
+    .head__title {
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+    .head__subtitle {
+      margin-bottom: 30px;
+    }
+    .head__description {
+      margin-bottom: 35px;
+    }
+    .head__link {
+      width: fit-content;
+    }
+  }
+  &.--light {
+    color: $light-color;
+    .head__title {
+      &::after {
+        background: $light-color;
+      }
+    }
+    .head__link {
+      &::after {
+        background: $light-color;
+      }
+    }
+  }
+  &.--dark {
+    color: $primary-color;
+  }
+}
