@@ -1,0 +1,38 @@
+.button {
+  display: flex;
+  font-size: 15px;
+  width: 200px;
+  height: 55px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 500px;
+  &-container {
+    &:nth-child(1) {
+      margin-right: 55px;
+    }
+    &.--light {
+      .button {
+        border: 1px solid $color-purple;
+        transition: all 0.3s ease-in;
+        &:hover {
+          border: 1px solid $color-purple_other;
+          background: $color-purple_other;
+          color: $light-color;
+        }
+      }
+    }
+    &.--purple {
+      .button {
+        border: 1px solid $color-purple_other;
+        background: $color-purple_other;
+        color: $light-color;
+        transition: all 0.3s ease-in;
+        &:hover {
+          border: 1px solid $color-purple;
+          background: $light-color;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface HeadOfBlockProps {
     header: {
-        title: string;
+        title: string 
         subtitle: string;
         description: string;
         link: string;

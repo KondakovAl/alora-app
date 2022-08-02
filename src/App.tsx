@@ -2,12 +2,31 @@ import React from 'react';
 
 /* components */
 import  HeadOfBlock  from './components/HeadOfBlock/index';
+import  {Button}  from './components/Button/index';
 
 /* scss */
 import './assets/scss/index.scss';
 
 /* images */
-import { logo, SocialFirst, SocialSecond } from './images/index';
+import { 
+  logo, 
+  introLogo,
+  introImg1,
+  introImg2,
+  introImg3,
+  promoImg1,
+  promoImg2,
+  promoImg3,
+  promoImg4,
+  promoImg5,
+  promoImg6,
+  SocialFirst,
+  SocialSecond 
+} from './images/index';
+
+import { HeadProps } from './types/types';
+
+
 
 
 const data = {
@@ -27,6 +46,32 @@ const data = {
       [
         {icon: <SocialFirst fill='#373C42'/>, href: ''},
         {icon: <SocialSecond fill='#373C42'/>, href: ''},
+    ]
+  },
+  intro: {
+    header: {
+      title: {
+        date: '2016-22', 
+        logo: introLogo, 
+        title: 'Allora = design + thinking' 
+      },
+      subtitle: 'Award winning digital design agency based in California',
+      description: 'Allora is a beautiful and simple Webflow Portfolio Template for those creatives and digital studios that want to have a powerful yet simple website where they can showcase their work and services. Allora. is the perfect fit for your business.',
+    },
+    images: [
+      {image: introImg1, alt: 'intro-image_1'},
+      {image: introImg2, alt: 'intro-image_1'},
+      {image: introImg3, alt: 'intro-image_1'},
+    ]
+  },
+  promo: {
+    images: [
+      {image: promoImg1, alt: 'promo-image_1', href: ''},
+      {image: promoImg2, alt: 'promo-image_2', href: ''},
+      {image: promoImg3, alt: 'promo-image_3', href: ''},
+      {image: promoImg4, alt: 'promo-image_4', href: ''},
+      {image: promoImg5, alt: 'promo-image_5', href: ''},
+      {image: promoImg6, alt: 'promo-image_6', href: ''},
     ]
   },
   solutions: {
@@ -117,14 +162,80 @@ const Header= ({header}: HeaderProps) => {
   );
 };
 
+interface IntroProps {
+      header: {
+          title: {
+              date: string;
+              logo: string;
+              title: string;
+          };
+          subtitle: string;
+          description: string;
+      };
+      images: {
+        image: string;
+        alt: string;
+    }[];
+  
+}
+
+const Intro = ({header, images}: IntroProps) => {
+  return (
+    <div className='intro'>
+      <div className="intro__wrapper wrapper">
+        <div className="intro__heading heading">
+          <h1 className="heading__title">
+            <span className="heading__title-text">{header.title.date}</span>
+            <img src={header.title.logo} alt="icon" className="heading__title-icon" />
+            <span className="heading__title-text">{header.title.title}</span>
+          </h1>
+          <h2 className="heading__subtitle">{header.subtitle}</h2>
+          <p className="heading__text">{header.description}</p>
+          <div className="heading__buttons">
+         <Button className='heading__button' variant='light' href=''>Start a Project</Button>
+         <Button className='heading__button' variant='purple' href=''>
+         We're Hiring
+         </Button>
+          </div>
+        </div>
+        <div className="intro__image-container">
+        {images.map((image, index) => ( 
+            <img className="intro__image" src={image.image} key={index} alt={image.alt}/>)
+            )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+interface PromoProps {
+  images: {
+    image: string;
+    alt: string;
+    href: string;
+}[];
+
+}
+
+const Promo = ({images}: PromoProps) => {
+return (
+<div className='promo'>
+  <div className="promo__wrapper wrapper">
+  {images.map((image, index) => ( 
+    <a className="promo__image-container" href={image.href}>
+      <img className="promo__image" src={image.image} key={index} alt={image.alt}/>
+    </a>)
+            )}
+  </div>
+</div>
+);
+};
+
 interface SolutionsProps {
   solutions: {
-    header: {
-        title: string;
-        subtitle: string;
-        description: string;
-        link: string;
-    }}
+    header: HeadProps;
+    }
 }
 
 const Solutions = ({solutions}: SolutionsProps) => {
@@ -139,12 +250,8 @@ const Solutions = ({solutions}: SolutionsProps) => {
 
 interface ProcedureProps {
   procedure: {
-    header: {
-        title: string;
-        subtitle: string;
-        description: string;
-        link: string;
-    }}
+    header: HeadProps;
+  }
 }
 
 const Procedure = ({procedure}: ProcedureProps) => {
@@ -159,12 +266,8 @@ const Procedure = ({procedure}: ProcedureProps) => {
 
 interface AboutProps {
   about: {
-    header: {
-        title: string;
-        subtitle: string;
-        description: string;
-        link: string;
-    }}
+    header: HeadProps;
+  }
 }
 
 const About = ({about}: AboutProps) => {
@@ -179,12 +282,8 @@ const About = ({about}: AboutProps) => {
 
 interface QuestionsProps {
   questions: {
-    header: {
-        title: string;
-        subtitle: string;
-        description: string;
-        link: string;
-    }}
+    header: HeadProps;
+  }
 }
 
 const Questions = ({questions}: QuestionsProps) => {
@@ -199,12 +298,8 @@ const Questions = ({questions}: QuestionsProps) => {
 
 interface ClientsProps {
   clients: {
-    header: {
-        title: string;
-        subtitle: string;
-        description: string;
-        link: string;
-    }}
+    header: HeadProps;
+  }
 }
 
 const Clients = ({clients}: ClientsProps) => {
@@ -222,6 +317,8 @@ const App = () => {
   return (
     <div className='layout'>
       <Header header={data.header} />
+      <Intro header = {data.intro.header} images={data.intro.images}/>
+      <Promo images={data.promo.images}/>
       <Solutions solutions = {data.solutions}/>
       <Procedure procedure = {data.procedure}/>
       <About about = {data.about}/>
