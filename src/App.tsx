@@ -1,8 +1,10 @@
 import React from 'react';
 
 /* components */
-import  HeadOfBlock  from './components/HeadOfBlock/index';
 import  {Button}  from './components/Button/index';
+import  {HeadOfBlock}  from './components/HeadOfBlock/index';
+import  {SolutionCards}  from './components/SolutionCards/index';
+import  {AboutComments}  from './components/AboutComments/index';
 
 /* scss */
 import './assets/scss/index.scss';
@@ -20,11 +22,19 @@ import {
   promoImg4,
   promoImg5,
   promoImg6,
+  solutionImg1,
+  solutionImg2,
+  solutionImg3,
+  solutionImg4,
+  solutionImg5,
   SocialFirst,
-  SocialSecond 
+  SocialSecond, 
+  aboutImg1,
+  aboutPhoto1,
+  aboutPhoto2
 } from './images/index';
 
-import { HeadProps } from './types/types';
+import { HeadProps, CardsProps, CommentsProps } from './types/types';
 
 
 
@@ -80,7 +90,39 @@ const data = {
       subtitle: 'Expect nothing less than perfect',
       description: 'Setting up your own portfolio site is an awesome method for communicating who you are as an inventive, and to impart your abilities to the world. How about we investigate how to make a free portfolio and all that you ought to remember for it.',
       link: 'How we work',
-    }
+    },
+    cards: [
+      {
+      img: solutionImg1,
+      id: '01',
+      title: 'Web Design',
+      description: 'Why investment portfolio is important to your career Allora can help you get your work noticed whether you are a graphic designer, product designer, web developer, writer, illustrator.',
+    },
+      {
+      img: solutionImg2,
+      id: '02',
+      title: 'Branding',
+      description: 'The portfolio website provides visibility for your work showing it to the people you want to see unlike the static black and white of traditional resumes online portfolios bring your work to life.',
+    },
+      {
+      img: solutionImg3,
+      id: '03',
+      title: 'UI/UX Design',
+      description: 'In full color it makes your participation in creative output a positive and direct experience. Potential clients and employers can immediately see your achievements and your uniqueness.',
+    },
+      {
+      img: solutionImg4,
+      id: '04',
+      title: 'Creative Direction',
+      description: 'The personal portfolio shows them your identity as a creative professional, the ideas behind your work and whether you are suitable for a particular job or project, put your work out in the world!',
+    },
+      {
+      img: solutionImg5,
+      id: '05',
+      title: 'Motion Graphics',
+      description: 'The portfolio conveys who you are most of us don’t come to a job interview with a bunch of unordered printouts you have to be ready get ready with Allora your best online alley.',
+    },
+  ]
   },
   procedure: {
     header: {
@@ -88,7 +130,33 @@ const data = {
       subtitle: `The goal isn't to build a website but to build your business`,
       description: 'The online portfolio works in a similar way in a user-friendly design it collects items that represent the best work you have done. This shows that you have a sense of responsibility and take your work seriously.',
       link: 'Know more about us',
-    }
+    },
+    list: [
+      {
+      id: '01',
+      item: `Goal Identification`,
+      },
+      {
+      id: '02',
+      item: `Scope Definition`,
+      },
+      {
+      id: '03',
+      item: `Sitemap and Wireframe Creation`,
+      },
+      {
+      id: '04',
+      item: `Content Creation`,
+      },
+      {
+      id: '05',
+      item: `Visual Elements`,
+      },
+      {
+      id: '06',
+      item: `Testing & Launch`,
+      },
+  ]
   },
   about: {
     header: {
@@ -96,7 +164,22 @@ const data = {
       subtitle: `Creating ideas & building brands that truly matter`,
       description: `When building your own portfolio, don't feel that you need to include anything you have ever created. Plan your best work and show the types of projects you want to do more.`,
       link: 'Our core values',
-    }
+    },
+    image: aboutImg1,
+    comments: [
+      {
+      photo: aboutPhoto1,
+      name: 'Lindsay Strotman',
+      position: 'CEO of Edition',
+      comment: '"Allora fits our needs perfectly is the most valuable business resource we have ever purchased we are so happy!"',
+      },
+      {
+      photo: aboutPhoto2,
+      name: 'Robert Keynton',
+      position: 'Designer at Webflow',
+      comment: '"Allora has completely surpassed our expectations not able to tell you how happy I am with your awesome work guys."',
+      },
+  ]
   },
   questions: {
     header: {
@@ -113,6 +196,21 @@ const data = {
       description: `Most creative projects involve collaboration. People want to know what it’s going to be like working with you and how your skills and talents can help them.`,
       link: 'Start a project',
     }
+  },
+  links: {
+    title: 'Usefull Links',
+    navigation:
+      [
+        {name: 'Work', href: ''},
+        {name: 'Services', href: ''},
+        {name: 'About us', href: ''},
+        {name: 'Send us a message', href: ''},
+      ],
+    contacts:
+      [
+        {name: '+1123 456 7890', href: 'tel:+1123 456 7890'},
+        {name: 'hello@medium.com', href: 'mailto:hello@medium.com'},
+    ],
   },
 }
 
@@ -235,6 +333,7 @@ return (
 interface SolutionsProps {
   solutions: {
     header: HeadProps;
+    cards: CardsProps[];
     }
 }
 
@@ -243,6 +342,7 @@ const Solutions = ({solutions}: SolutionsProps) => {
     <div className='solutions'>
       <div className="solutions__wrapper wrapper">
         <HeadOfBlock header = {solutions.header} className = 'solutions' apperance = 'horizontal'/>
+        <SolutionCards cards = {solutions.cards} className = 'solutions'/>
       </div>
     </div>
   );
@@ -251,6 +351,10 @@ const Solutions = ({solutions}: SolutionsProps) => {
 interface ProcedureProps {
   procedure: {
     header: HeadProps;
+    list: {
+      id: string;
+      item: string;
+  }[];
   }
 }
 
@@ -259,6 +363,14 @@ const Procedure = ({procedure}: ProcedureProps) => {
     <div className='procedure'>
       <div className="procedure__wrapper wrapper">
         <HeadOfBlock header = {procedure.header} className = 'procedure' apperance = 'horizontal'/>
+        <ul className="procedure__list">
+          {procedure.list.map((l,index) => (
+            <li className="procedure__list-item" key={index}>
+              <span className="procedure__list-item_number">{l.id}</span>
+              {l.item}</li>
+          ))}
+          
+        </ul>
       </div>
     </div>
   );
@@ -267,6 +379,8 @@ const Procedure = ({procedure}: ProcedureProps) => {
 interface AboutProps {
   about: {
     header: HeadProps;
+    image: string;
+    comments: CommentsProps[];
   }
 }
 
@@ -275,6 +389,10 @@ const About = ({about}: AboutProps) => {
     <div className='about'>
       <div className="about__wrapper wrapper">
         <HeadOfBlock header = {about.header} className = 'about' apperance = 'vertical' color = 'light'/>
+        <div className="about__image-container">
+          <img src={about.image} alt="" className="about__image" />
+          </div>
+          <AboutComments comments = {about.comments} className='about'/>
       </div>
     </div>
   );
@@ -307,6 +425,60 @@ const Clients = ({clients}: ClientsProps) => {
     <div className='clients'>
       <div className="clients__wrapper wrapper">
         <HeadOfBlock header = {clients.header} className = 'clients' apperance = 'vertical' color = 'light'/>
+        <iframe width="575" height="800" src="https://www.youtube.com/embed/dQw4w9WgXcQ?start=43" title="YouTube video player"></iframe>
+      </div>
+    </div>
+  );
+};
+
+
+interface Links {
+  links: {
+    title: string;
+    navigation: {
+        name: string;
+        href: string;
+    }[];
+    contacts: {
+        name: string;
+        href: string;
+    }[];
+}
+}
+
+const Links = ({links}: Links) => {
+  return (
+    <div className='links'>
+      <div className="links__wrapper wrapper">
+          <h6 className="links__title">{links.title}</h6>
+          <nav className="links__navigation">
+            {links.navigation.map((nav, index) => ( 
+              <>
+            <a className="links__navigation-item" href={nav.href} key={index}>{nav.name}</a>
+            <div className="links__dot"/>
+              </>
+            )
+            )}
+          </nav>
+          <div className="links__contacts">
+          {links.contacts.map((contact, index) => ( 
+              <>
+            <a className="links__contacts-item" href={contact.href} key={index}>{contact.name}</a>
+            <div className="links__dot"/>
+              </>
+              )
+            )}
+          </div>
+       </div>
+    </div>
+  );
+};
+
+const Copyright = () => {
+  return (
+    <div className='copyright'>
+      <div className="copyright__wrapper wrapper">
+      Copyright ©2022 Made by <span className="copyright_colored">KondakovAl</span>
       </div>
     </div>
   );
@@ -324,6 +496,8 @@ const App = () => {
       <About about = {data.about}/>
       <Questions questions = {data.questions}/>
       <Clients clients = {data.clients}/>
+      <Links links = {data.links}/>
+      <Copyright/>
     </div>
   );
 };

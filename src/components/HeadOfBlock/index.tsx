@@ -1,12 +1,8 @@
 import React from 'react';
+import { HeadProps } from '../../types/types';
 
 interface HeadOfBlockProps {
-    header: {
-        title: string 
-        subtitle: string;
-        description: string;
-        link: string;
-    }
+    header: HeadProps;
     className?: string,
     apperance: 'horizontal' | 'vertical',
     color?: 'dark' | 'light',
@@ -39,4 +35,4 @@ const HeadOfBlock = ({ header, className,  apperance, color}:HeadOfBlockProps) =
   );
 };
 
-export default HeadOfBlock;
+export {HeadOfBlock};

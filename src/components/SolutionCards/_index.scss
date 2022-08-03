@@ -1,0 +1,36 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px 60px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  &__image-container {
+    margin-bottom: 30px;
+    display: flex;
+  }
+  &__number {
+    position: relative;
+    margin-bottom: 20px;
+    font-family: $font-stack-secondary;
+    font-size: $font-size-secondary;
+    line-height: $line-height-secondary;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 11px;
+      left: 10%;
+      height: 2px;
+      width: 120px;
+      background: $color-purple_other;
+    }
+  }
+  &__title {
+    margin-bottom: 10px;
+    font-family: $font-stack-tertiary;
+    font-size: 26px;
+    line-height: 36px;
+  }
+}

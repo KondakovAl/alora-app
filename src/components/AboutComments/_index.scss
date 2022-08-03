@@ -1,0 +1,35 @@
+.comment {
+  background: $light-color;
+  padding: 25px;
+  border-radius: 5px;
+  max-width: 400px;
+  &__text {
+    margin: 0 0 20px;
+    text-align: justify;
+  }
+  &__wrapper {
+    &_main {
+      display: flex;
+      align-items: center;
+    }
+    &_mini {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+  &__image {
+    &-container {
+      margin-right: 20px;
+    }
+  }
+  &__info {
+    line-height: 19px;
+    &:nth-child(1) {
+      font-size: 15px;
+    }
+    &:nth-child(2) {
+      font-size: 13px;
+    }
+  }
+}
