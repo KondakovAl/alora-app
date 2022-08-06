@@ -418,6 +418,66 @@ body {
   &__wrapper {
     max-width: 1200px;
   }
+  .head {
+    margin-bottom: 55px;
+  }
+}
+
+.pagination {
+  &__list {
+    display: flex;
+    border-bottom: 1px solid #abb9ca;
+    margin-bottom: 20px;
+    &-item {
+      position: relative;
+      overflow: hidden;
+      padding: 10px;
+      flex-grow: 1;
+      color: $color-questions-text;
+      text-transform: uppercase;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      &::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: #abb9ca;
+        bottom: 0;
+        left: 0;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+      &.--active {
+        &::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+      }
+    }
+  }
+}
+
+.faq {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px 20px;
+  &__item {
+    padding: 32px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  &__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  &__icon-container {
+    display: flex;
+  }
 }
 
 /*Clients Section*/
@@ -427,6 +487,40 @@ body {
   background: $bg-color-purple;
   &__wrapper {
     max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__logos {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  &__logo-link {
+    padding: 22px;
+    border-top: 1px solid $light-color;
+    border-left: 1px solid $light-color;
+    &:nth-child(-n + 3) {
+      border-top: none;
+    }
+    &:first-child,
+    &:nth-child(3n + 1) {
+      border-left: none;
+    }
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    & svg {
+      transition: fill 0.3s ease-in;
+    }
+    &:hover {
+      & svg {
+        fill: $color-yellow;
+      }
+    }
+  }
+  .head {
+    margin-bottom: 50px;
   }
 }
 

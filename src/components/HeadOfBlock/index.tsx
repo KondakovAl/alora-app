@@ -10,7 +10,7 @@ interface HeadOfBlockProps {
 
 const HeadOfBlock = ({ header, className,  apperance, color}:HeadOfBlockProps) => {
   return (
-    <div className={`head ${className ? `head__${className}` : ''} --${apperance} ${color ? `--${color}` : ''}`}>
+    <div className={`head ${className ? `${className}__head` : ''} --${apperance} ${color ? `--${color}` : ''}`}>
       {apperance === 'horizontal' && (
         <>
       <div className='head__container'>

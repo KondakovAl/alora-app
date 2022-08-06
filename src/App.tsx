@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /* components */
 import  {Button}  from './components/Button/index';
@@ -31,7 +31,17 @@ import {
   SocialSecond, 
   aboutImg1,
   aboutPhoto1,
-  aboutPhoto2
+  aboutPhoto2,
+  ClientsLogo1,
+  ClientsLogo2,
+  ClientsLogo3,
+  ClientsLogo4,
+  ClientsLogo5,
+  ClientsLogo6,
+  ClientsLogo7,
+  ClientsLogo8,
+  ClientsLogo9,
+  Arrow,
 } from './images/index';
 
 import { HeadProps, CardsProps, CommentsProps } from './types/types';
@@ -195,7 +205,18 @@ const data = {
       subtitle: `Join world's best brands who trusted Allora`,
       description: `Most creative projects involve collaboration. People want to know what it’s going to be like working with you and how your skills and talents can help them.`,
       link: 'Start a project',
-    }
+    },
+    logos: [
+      {logo: <ClientsLogo1 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo2 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo3 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo4 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo5 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo6 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo7 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo8 fill='#fff'/>, href: ''},
+      {logo: <ClientsLogo9 fill='#fff'/>, href: ''},
+    ]
   },
   links: {
     title: 'Usefull Links',
@@ -405,26 +426,78 @@ interface QuestionsProps {
 }
 
 const Questions = ({questions}: QuestionsProps) => {
+
+
+
   return (
     <div className='questions'>
       <div className="questions__wrapper wrapper">
         <HeadOfBlock header = {questions.header} className = 'questions' apperance = 'horizontal' color = 'dark'/>
+        <div className="questions__container">
+          <FAQ/>
+        </div>
       </div>
     </div>
   );
 };
 
-interface ClientsProps {
-  clients: {
-    header: HeadProps;
+
+const FAQ = () => {
+
+  const dataFAQ = {
+    pagination: [
+      {name: 'General inQuiries'},
+      {name: 'Services'},
+      {name: 'Billing & Suppor'},
+    ]
   }
+
+  const [variant, setVariant] = useState('General inQuiries');
+
+  return (
+    <>
+      <ul className="pagination__list">
+        {dataFAQ.pagination.map((pag, index) => (
+          <li className={`pagination__list-item ${variant === pag.name ? '--active': ''}`} onClick={()=> setVariant(pag.name)} key={index}>{pag.name}</li>
+        ))}
+      </ul>
+      <div className="faq">
+        <div className="faq__item">
+          <div className="faq__question">
+          Can you design my Website?
+          <div className="faq__icon-container">
+            <Arrow/>
+          </div>
+          </div>
+        </div>  
+      </div>
+      </>
+  );
+};
+
+
+interface ClientsProps {
+  header: HeadProps;
+  logos: {
+    logo: JSX.Element;
+    href: string;
+  }[];
 }
 
-const Clients = ({clients}: ClientsProps) => {
+const Clients = ({header, logos}: ClientsProps) => {
   return (
     <div className='clients'>
       <div className="clients__wrapper wrapper">
-        <HeadOfBlock header = {clients.header} className = 'clients' apperance = 'vertical' color = 'light'/>
+        <div className="clients__container">
+        <HeadOfBlock header = {header} className = 'clients' apperance = 'vertical' color = 'light'/>
+        <div className="clients__logos">
+        {logos.map((logo, index) => (
+          <a href={logo.href} className="clients__logo-link" key={index}>
+            {logo.logo}
+          </a>
+        ))}
+        </div>
+        </div>
         <iframe width="575" height="800" src="https://www.youtube.com/embed/dQw4w9WgXcQ?start=43" title="YouTube video player"></iframe>
       </div>
     </div>
@@ -495,7 +568,7 @@ const App = () => {
       <Procedure procedure = {data.procedure}/>
       <About about = {data.about}/>
       <Questions questions = {data.questions}/>
-      <Clients clients = {data.clients}/>
+      <Clients header = {data.clients.header} logos={data.clients.logos}/>
       <Links links = {data.links}/>
       <Copyright/>
     </div>

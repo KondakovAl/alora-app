@@ -25,6 +25,18 @@ import aboutPhoto2 from '../assets/images/about-photo_2.jpg';
 import { ReactComponent as SocialFirst} from '../assets/images/social_1.svg';
 import { ReactComponent as SocialSecond} from '../assets/images/social_2.svg';
 
+import { ReactComponent as ClientsLogo1} from '../assets/images/clients-logo_1.svg';
+import { ReactComponent as ClientsLogo2} from '../assets/images/clients-logo_2.svg';
+import { ReactComponent as ClientsLogo3} from '../assets/images/clients-logo_3.svg';
+import { ReactComponent as ClientsLogo4} from '../assets/images/clients-logo_4.svg';
+import { ReactComponent as ClientsLogo5} from '../assets/images/clients-logo_5.svg';
+import { ReactComponent as ClientsLogo6} from '../assets/images/clients-logo_6.svg';
+import { ReactComponent as ClientsLogo7} from '../assets/images/clients-logo_7.svg';
+import { ReactComponent as ClientsLogo8} from '../assets/images/clients-logo_8.svg';
+import { ReactComponent as ClientsLogo9} from '../assets/images/clients-logo_9.svg';
+
+import { ReactComponent as Arrow} from '../assets/images/arrow.svg';
+
 export { 
     logo, 
     introLogo, 
@@ -46,4 +58,14 @@ export {
     aboutPhoto1,
     aboutPhoto2, 
     SocialFirst, 
-    SocialSecond  };
+    SocialSecond,
+    ClientsLogo1,
+    ClientsLogo2,
+    ClientsLogo3,
+    ClientsLogo4,
+    ClientsLogo5,
+    ClientsLogo6,
+    ClientsLogo7,
+    ClientsLogo8,
+    ClientsLogo9,
+    Arrow  };
