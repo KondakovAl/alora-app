@@ -5,9 +5,13 @@ import  {Button}  from './components/Button/index';
 import  {HeadOfBlock}  from './components/HeadOfBlock/index';
 import  {SolutionCards}  from './components/SolutionCards/index';
 import  {AboutComments}  from './components/AboutComments/index';
+import { FAQ } from './components/FAQ/index';
 
 /* scss */
 import './assets/scss/index.scss';
+
+/*video*/
+import  video  from './assets/files/video.mp4';
 
 /* images */
 import { 
@@ -41,11 +45,11 @@ import {
   ClientsLogo7,
   ClientsLogo8,
   ClientsLogo9,
+  clientsPoster,
   Arrow,
 } from './images/index';
 
 import { HeadProps, CardsProps, CommentsProps } from './types/types';
-
 
 
 
@@ -199,6 +203,40 @@ const data = {
       link: 'Our Clients',
     }
   },
+  contacts: {
+      header: {
+        title: 'Contact Us',
+        subtitle: `Dedicated to serve our customers`,
+        description: `Branding isn’t only for big companies. Whether you’re a retail giant or a freelancer, branding shows your value and how you’re different from the competition.`,
+        link: '',
+      },
+      contact: [
+        {
+          id: '01',
+          title: 'Collaborate',
+          description: `If you're ready to start a project, fill up the form below and our team will be in touch to find out more.`,
+          link: 'hello@allora.com',
+          href: 'mailto:hello@allora.com',
+          blockType: 'form',
+        },
+        {
+          id: '01',
+          title: 'Join our team',
+          description: `We're always looking for talented new members that push us to be bolder, dream bigger, and perform better.`,
+          link: 'team@allora.com',
+          href: 'mailto:team@allora.com',
+          blockType: 'idle',
+        },
+        {
+          id: '01',
+          title: 'Just say hello',
+          description: `Used as a greeting or to begin a phone conversation, so here are the details to do so.`,
+          link: 'Call us on +1123 456 7890',
+          href: 'tel:+1123 456 7890',
+          blockType: 'adress',
+        },
+      ]
+  },
   clients: {
     header: {
       title: 'Our Clients',
@@ -295,7 +333,6 @@ interface IntroProps {
         image: string;
         alt: string;
     }[];
-  
 }
 
 const Intro = ({header, images}: IntroProps) => {
@@ -327,14 +364,12 @@ const Intro = ({header, images}: IntroProps) => {
   );
 };
 
-
 interface PromoProps {
   images: {
     image: string;
     alt: string;
     href: string;
 }[];
-
 }
 
 const Promo = ({images}: PromoProps) => {
@@ -426,9 +461,6 @@ interface QuestionsProps {
 }
 
 const Questions = ({questions}: QuestionsProps) => {
-
-
-
   return (
     <div className='questions'>
       <div className="questions__wrapper wrapper">
@@ -440,41 +472,6 @@ const Questions = ({questions}: QuestionsProps) => {
     </div>
   );
 };
-
-
-const FAQ = () => {
-
-  const dataFAQ = {
-    pagination: [
-      {name: 'General inQuiries'},
-      {name: 'Services'},
-      {name: 'Billing & Suppor'},
-    ]
-  }
-
-  const [variant, setVariant] = useState('General inQuiries');
-
-  return (
-    <>
-      <ul className="pagination__list">
-        {dataFAQ.pagination.map((pag, index) => (
-          <li className={`pagination__list-item ${variant === pag.name ? '--active': ''}`} onClick={()=> setVariant(pag.name)} key={index}>{pag.name}</li>
-        ))}
-      </ul>
-      <div className="faq">
-        <div className="faq__item">
-          <div className="faq__question">
-          Can you design my Website?
-          <div className="faq__icon-container">
-            <Arrow/>
-          </div>
-          </div>
-        </div>  
-      </div>
-      </>
-  );
-};
-
 
 interface ClientsProps {
   header: HeadProps;
@@ -497,8 +494,55 @@ const Clients = ({header, logos}: ClientsProps) => {
           </a>
         ))}
         </div>
+        <p className="clients__text">
+        By telling these stories, they get a glimpse into your creative process and know what to expect if they hire you.
+        </p>
         </div>
-        <iframe width="575" height="800" src="https://www.youtube.com/embed/dQw4w9WgXcQ?start=43" title="YouTube video player"></iframe>
+        <div className="clients__video-container">
+          <video 
+          className="clients__video" 
+          controls
+          poster={clientsPoster}
+          >
+            <source 
+            src={video}          
+            type='video/mp4'
+            />
+           
+          The video element is incredible.
+          <a href={video} download>Download video</a>.
+          </video>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+interface ContactsProps {
+    header: HeadProps;
+    contact: ContactProps[];
+}
+
+const Contacts = ({header, contact}: ContactsProps) => {
+  return (
+    <div className='contacts'>
+      <div className="contacts__wrapper wrapper">
+        <HeadOfBlock header = {header} className = 'contacts' apperance = 'vertical' color = 'dark'/>
+        <div className="contacts__container">
+            {contact.map((cont) => (
+          <div className="contacts__contact contact" key={cont.id}>
+              <span className="contact__number">{cont.id}</span>
+            <h6 className="contact__title">{cont.title}</h6>
+            <p className="contact__text">{cont.description}</p>
+            <a href={cont.href} className="contact__link">{cont.link}</a>
+            {cont.blockType === 'form' && (
+              <div className="contact__form">dfsdfsdfsd</div>
+            )}
+          </div>
+            ))}
+            
+        </div>
       </div>
     </div>
   );
@@ -551,7 +595,7 @@ const Copyright = () => {
   return (
     <div className='copyright'>
       <div className="copyright__wrapper wrapper">
-      Copyright ©2022 Made by <span className="copyright_colored">KondakovAl</span>
+      Copyright ©2022 Made by <a  href='https://github.com/KondakovAl'className="copyright_colored">KondakovAl</a>
       </div>
     </div>
   );
@@ -569,6 +613,7 @@ const App = () => {
       <About about = {data.about}/>
       <Questions questions = {data.questions}/>
       <Clients header = {data.clients.header} logos={data.clients.logos}/>
+      <Contacts header = {data.contacts.header} contact={data.contacts.contact}/>
       <Links links = {data.links}/>
       <Copyright/>
     </div>

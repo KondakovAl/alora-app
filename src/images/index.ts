@@ -22,6 +22,7 @@ import aboutImg1 from '../assets/images/about-image_1.png';
 import aboutPhoto1 from '../assets/images/about-photo_1.jpg';
 import aboutPhoto2 from '../assets/images/about-photo_2.jpg';
 
+
 import { ReactComponent as SocialFirst} from '../assets/images/social_1.svg';
 import { ReactComponent as SocialSecond} from '../assets/images/social_2.svg';
 
@@ -34,6 +35,8 @@ import { ReactComponent as ClientsLogo6} from '../assets/images/clients-logo_6.s
 import { ReactComponent as ClientsLogo7} from '../assets/images/clients-logo_7.svg';
 import { ReactComponent as ClientsLogo8} from '../assets/images/clients-logo_8.svg';
 import { ReactComponent as ClientsLogo9} from '../assets/images/clients-logo_9.svg';
+import clientsPoster from '../assets/images/clients-poster.png';
+
 
 import { ReactComponent as Arrow} from '../assets/images/arrow.svg';
 
@@ -68,4 +71,5 @@ export {
     ClientsLogo7,
     ClientsLogo8,
     ClientsLogo9,
+    clientsPoster,
     Arrow  };
