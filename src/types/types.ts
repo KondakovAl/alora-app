@@ -18,3 +18,12 @@ export interface CommentsProps {
     position: string;
     comment: string;
 }
+
+export interface ContactProps {  
+    id: string;
+    title: string;
+    description: string;
+    link: string;
+    href: string;
+    blockType: string,
+}

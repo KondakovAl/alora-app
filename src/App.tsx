@@ -6,6 +6,7 @@ import  {HeadOfBlock}  from './components/HeadOfBlock/index';
 import  {SolutionCards}  from './components/SolutionCards/index';
 import  {AboutComments}  from './components/AboutComments/index';
 import { FAQ } from './components/FAQ/index';
+import {Form} from './components/Form';
 
 /* scss */
 import './assets/scss/index.scss';
@@ -49,7 +50,8 @@ import {
   Arrow,
 } from './images/index';
 
-import { HeadProps, CardsProps, CommentsProps } from './types/types';
+import { HeadProps, CardsProps, CommentsProps, ContactProps } from './types/types';
+
 
 
 
@@ -537,7 +539,7 @@ const Contacts = ({header, contact}: ContactsProps) => {
             <p className="contact__text">{cont.description}</p>
             <a href={cont.href} className="contact__link">{cont.link}</a>
             {cont.blockType === 'form' && (
-              <div className="contact__form">dfsdfsdfsd</div>
+              <Form/>
             )}
           </div>
             ))}
