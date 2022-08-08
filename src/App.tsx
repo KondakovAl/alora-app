@@ -6,7 +6,6 @@ import  {HeadOfBlock}  from './components/HeadOfBlock/index';
 import  {SolutionCards}  from './components/SolutionCards/index';
 import  {AboutComments}  from './components/AboutComments/index';
 import { FAQ } from './components/FAQ/index';
-import {Form} from './components/Form';
 
 /* scss */
 import './assets/scss/index.scss';
@@ -51,6 +50,7 @@ import {
 } from './images/index';
 
 import { HeadProps, CardsProps, CommentsProps, ContactProps } from './types/types';
+import { Form } from './components/Form';
 
 
 
@@ -222,7 +222,7 @@ const data = {
           blockType: 'form',
         },
         {
-          id: '01',
+          id: '02',
           title: 'Join our team',
           description: `We're always looking for talented new members that push us to be bolder, dream bigger, and perform better.`,
           link: 'team@allora.com',
@@ -230,7 +230,7 @@ const data = {
           blockType: 'idle',
         },
         {
-          id: '01',
+          id: '03',
           title: 'Just say hello',
           description: `Used as a greeting or to begin a phone conversation, so here are the details to do so.`,
           link: 'Call us on +1123 456 7890',
@@ -532,14 +532,14 @@ const Contacts = ({header, contact}: ContactsProps) => {
       <div className="contacts__wrapper wrapper">
         <HeadOfBlock header = {header} className = 'contacts' apperance = 'vertical' color = 'dark'/>
         <div className="contacts__container">
-            {contact.map((cont) => (
-          <div className="contacts__contact contact" key={cont.id}>
+            {contact.map((cont, index) => (
+          <div className="contacts__contact contact" key={index}>
               <span className="contact__number">{cont.id}</span>
             <h6 className="contact__title">{cont.title}</h6>
             <p className="contact__text">{cont.description}</p>
             <a href={cont.href} className="contact__link">{cont.link}</a>
             {cont.blockType === 'form' && (
-              <Form/>
+              <Form />
             )}
           </div>
             ))}

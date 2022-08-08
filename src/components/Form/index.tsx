@@ -27,7 +27,7 @@ const Form = () => {
     setTimeout(() => {
       console.log(data);
       setFormIsSubmit(true);
-      reset();
+      
     }, 600);
   };
 
@@ -43,6 +43,7 @@ const Form = () => {
           className={'form-submited__button'}
           onClick={() => {
             setFormIsSubmit(false);
+            reset();
           }}
           variant="form"
         >
@@ -55,8 +56,7 @@ const Form = () => {
   return (
     <form className='form' onSubmit={handleSubmit(onSubmit)}>
       <Input
-        title='name'
-        name='name'
+        name='Name'
         required
         register={register}
         errors={errors}
@@ -64,17 +64,15 @@ const Form = () => {
         validationType='name'
       />
       <Input
-        title='email'
-        name='email'
+        name='Email'
         required
         register={register}
         errors={errors}
-        errorText='Enter the email address in the format example@example.com'
+        errorText='Enter the email address'
         validationType='email'
       />
       <Input
-        title='phone'
-        name='phone'
+        name='Phone'
         required
         register={register}
         errors={errors}
@@ -82,12 +80,12 @@ const Form = () => {
         validationType='phone'
       />
       <Textarea
-        title='message'
-        name='message'
+        name='Message'
         required
         register={register}
         errors={errors}
         errorText='Enter your message'
+        placeholder='Please indicate the nature of your inquiry...'
       />
       <Button className='form__button' variant="form">submit-message</Button>
     </form>

@@ -1,7 +1,6 @@
 import React from "react";
 
 interface InputProps {
-  title: string;
   name: string;
   required: boolean; 
   register: any; /* Check !*/
@@ -11,7 +10,6 @@ interface InputProps {
 }
 
 const Input = ({
-  title,
   name,
   required,
   register,
@@ -22,8 +20,7 @@ const Input = ({
   const regExpName = /^[?!,.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
   const regExpEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    const regExpPhone =/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+  const regExpPhone =/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
 
   const validationFunction = (value: string, validationType: string, required: boolean) => {
     if (required === false) if (value.length < 1) return true;
@@ -34,7 +31,7 @@ const Input = ({
       case "email":
         return regExpEmail.test(value);
 
-      case "email":
+      case "phone":
         return regExpPhone.test(value);
 
       default:
@@ -43,7 +40,6 @@ const Input = ({
   };
   return (
     <div className="form__group">
-      <label className="form__label">_{title}:</label>
       <input
         className={`form__input ${errors && errors[name] ? "error" : ""}`}
         {...register(name, {
@@ -52,7 +48,9 @@ const Input = ({
             validationFunction(value, validationType, required),
         })}
         autoComplete="off"
+        placeholder={name}
       />
+      
       {errors && errors[name] && (
         <div className="form__label-error">{errorText}</div>
       )}

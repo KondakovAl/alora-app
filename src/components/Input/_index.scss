@@ -1,57 +1,39 @@
 /*Input*/
 
-// .form {
-//   &__group {
-//     display: flex;
-//     flex-direction: column;
-//     margin: 0 0 5px;
-//     min-height: 100px;
-//     width: inherit;
-//   }
-//   &__label {
-//     margin: 0 0 10px;
-//   }
-//   &__input {
-//     height: 40px;
-//     color: #465e77;
-//     padding: 10px 15px;
-//     width: 100%;
-//     background: #011221;
-//     outline: none;
-//     border: 1px solid $color-border-main;
-//     border-radius: 8px;
-//     transition: all 0.3s ease-out;
-//     &:focus {
-//       border: 1px solid #607b96;
-//       box-shadow: 0px 0px 0px 2px #607b964d;
-//     }
-//     &.error {
-//       border-width: 1px 1px 1px 10px;
-//       border-color: $color-error;
-//       color: $color-error;
-//       &:focus {
-//         box-shadow: none;
-//       }
-//     }
-//   }
-
-//   &__label-error {
-//     text-align: end;
-//     margin: 5px 0 0;
-//     font-size: 12px;
-//     line-height: 12px;
-//     color: $color-error;
-//   }
-// }
-
-// input:-webkit-autofill {
-//   -webkit-box-shadow: inset 0 0 0 50px #607b964d;
-//   -webkit-text-fill-color: #465e77 !important;
-//   -webkit-background: #011221 !important;
-// }
-
-// input:-webkit-autofill:focus {
-//   -webkit-box-shadow: 0px 0px 0px 2px #607b96, inset 0px 0px 0px 2px #607b964d;
-//   -webkit-text-fill-color: #465e77 !important;
-//   -webkit-background: #011221 !important;
-// }
+.form {
+  margin: 55px 0 0;
+  &__group {
+    margin: 0 0 10px;
+    min-height: 70px;
+    width: inherit;
+  }
+  &__input {
+    height: 53px;
+    color: $primary-color;
+    padding: 14px 25px;
+    width: 100%;
+    background: $light-color;
+    outline: none;
+    border: 1px solid $bg-color-purple;
+    border-radius: 8px;
+    transition: all 0.3s ease-out;
+    &:focus {
+      box-shadow: 0px 0px 0px 2px $color-yellow inset;
+    }
+    &.error {
+      border-width: 1px 1px 1px 10px;
+      border-color: $color-purple_dark;
+      color: $color-purple_dark;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+  &__label-error {
+    color: $light-color;
+    text-align: end;
+    margin: 5px 0 0;
+    font-size: 12px;
+    line-height: 12px;
+  }
+}

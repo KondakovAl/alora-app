@@ -6,6 +6,21 @@
   justify-content: center;
   align-items: center;
   border-radius: 500px;
+
+  &.--form {
+    border: 1px solid $color-purple_other;
+    background: $bg-color;
+    border-radius: 0px;
+    width: 150px;
+    height: 35px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    &:hover {
+      border: 2px solid $light-color;
+      background: $color-purple_other;
+      color: $light-color;
+    }
+  }
   &-container {
     &:nth-child(1) {
       margin-right: 55px;

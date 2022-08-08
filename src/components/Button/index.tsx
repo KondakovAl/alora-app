@@ -12,14 +12,14 @@ const Button = ({className, variant, children, href, onClick} : ButtonProps) => 
     return (
         <>
         {variant === 'form' ? (
-        <button>
+        <button className={`button ${className ? className : ''} ${variant ? `--${variant}` : ''}`} onClick={onClick}>
           {children}
         </button>
         ) 
         : 
         (
         <a href={href} className={`button-container ${className ? `${className}-container` : ''} ${variant ? `--${variant}` : ''}`}
-        onClick={onClick}>
+        >
         <span className={`button ${className ? className : ''}`}>
             {children}
         </span>
