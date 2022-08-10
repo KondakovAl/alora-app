@@ -35,7 +35,7 @@ const Form = () => {
   if (formIsSubmit) {
     return (
       <div className='form-submited'>
-        <h1 className='form-submited__title'>Thank you! &#129311;</h1>
+        <h5 className='form-submited__title'>Thank you! &#128133;</h5>
         <p className='form-submited__text'>
           Your message has been accepted. You will recieve answer really soon!
         </p>
@@ -45,7 +45,7 @@ const Form = () => {
             setFormIsSubmit(false);
             reset();
           }}
-          variant="form"
+          isForm
         >
           send-new-message
         </Button>
@@ -87,7 +87,7 @@ const Form = () => {
         errorText='Enter your message'
         placeholder='Please indicate the nature of your inquiry...'
       />
-      <Button className='form__button' variant="form">submit-message</Button>
+      <Button className='form__button' isForm>submit-message</Button>
     </form>
   );
 };

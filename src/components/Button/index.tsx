@@ -3,16 +3,17 @@ import React from 'react';
 interface ButtonProps {
     children: React.ReactNode;
     className?: string;
-    variant: 'light' | 'purple' | 'form';
+    variant?: 'light' | 'purple';
+    isForm?: boolean;
     href?: string;
     onClick?: () => void;
 }
 
-const Button = ({className, variant, children, href, onClick} : ButtonProps) => {
+const Button = ({className, variant, isForm ,children, href, onClick} : ButtonProps) => {
     return (
         <>
-        {variant === 'form' ? (
-        <button className={`button ${className ? className : ''} ${variant ? `--${variant}` : ''}`} onClick={onClick}>
+        {isForm ? (
+        <button className={`button ${className ? className : ''} ${isForm ? `--form `: ''}`} onClick={onClick}>
           {children}
         </button>
         ) 
