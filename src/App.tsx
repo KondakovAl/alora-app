@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 /* components */
 import { Button } from './components/Button/index';
@@ -6,6 +6,8 @@ import { HeadOfBlock } from './components/HeadOfBlock/index';
 import { SolutionCards } from './components/SolutionCards/index';
 import { AboutComments } from './components/AboutComments/index';
 import { FAQ } from './components/FAQ/index';
+import { Form } from './components/Form';
+import { Popup } from './components/Popup';
 
 /* scss */
 import './assets/scss/index.scss';
@@ -55,8 +57,8 @@ import {
   CommentsProps,
   ContactProps,
 } from './types/types';
-import { Form } from './components/Form';
-import { transform } from 'typescript';
+
+import { useWindowWidth } from './hooks/useWindowWidth';
 
 const data = {
   header: {
@@ -87,8 +89,8 @@ const data = {
     },
     images: [
       { image: introImg1, alt: 'intro-image_1' },
-      { image: introImg2, alt: 'intro-image_1' },
-      { image: introImg3, alt: 'intro-image_1' },
+      { image: introImg2, alt: 'intro-image_2' },
+      { image: introImg3, alt: 'intro-image_3' },
     ],
   },
   promo: {
@@ -301,49 +303,166 @@ interface HeaderProps {
 }
 
 const Header = ({ header }: HeaderProps) => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const windowWidth = useWindowWidth();
+
+  useEffect(() => {
+    isNavOpen && (document.body.style.overflow = 'hidden');
+    !isNavOpen && (document.body.style.overflow = '');
+  }, [isNavOpen]);
+
   return (
     <header className='header'>
-      <div className='header__wrapper wrapper'>
-        <div className='header__logo-container'>
-          <img className='header__logo' src={logo} />
+      {windowWidth && windowWidth >= 1000 ? (
+        <HeaderDesktop
+          navigation={header.navigation}
+          contacts={header.contacts}
+          socials={header.socials}
+        />
+      ) : (
+        <HeaderMobile
+          isNavOpen={isNavOpen}
+          setIsNavOpen={setIsNavOpen}
+          navigation={header.navigation}
+          contacts={header.contacts}
+          socials={header.socials}
+        />
+      )}
+    </header>
+  );
+};
+
+interface HeaderDesktopProps {
+  navigation: {
+    name: string;
+    href: string;
+  }[];
+  contacts: {
+    name: string;
+    href: string;
+  }[];
+  socials: {
+    icon: JSX.Element;
+    href: string;
+  }[];
+}
+
+const HeaderDesktop = ({
+  navigation,
+  contacts,
+  socials,
+}: HeaderDesktopProps) => {
+  return (
+    <div className='header__wrapper wrapper'>
+      <div className='header__logo-container'>
+        <img className='header__logo' src={logo} />
+      </div>
+      <div className='header__menu'>
+        <nav className='header__navigation'>
+          {navigation.map((nav, index) => (
+            <a className='header__navigation-item' href={nav.href} key={index}>
+              {nav.name}
+            </a>
+          ))}
+        </nav>
+        <div className='header__contacts'>
+          {contacts.map((contact, index) => (
+            <a
+              className='header__contacts-item'
+              href={contact.href}
+              key={index}
+            >
+              {contact.name}
+            </a>
+          ))}
         </div>
-        <div className='header__menu'>
-          <nav className='header__navigation'>
-            {header.navigation.map((nav, index) => (
-              <a
-                className='header__navigation-item'
-                href={nav.href}
-                key={index}
-              >
-                {nav.name}
-              </a>
-            ))}
-          </nav>
-          <div className='header__contacts'>
-            {header.contacts.map((contact, index) => (
-              <a
-                className='header__contacts-item'
-                href={contact.href}
-                key={index}
-              >
-                {contact.name}
-              </a>
-            ))}
-          </div>
-          <div className='header__socials'>
-            {header.socials.map((social, index) => (
-              <a
-                className='header__socials-logo-container'
-                href={social.href}
-                key={index}
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
+        <div className='header__socials'>
+          {socials.map((social, index) => (
+            <a
+              className='header__socials-logo-container'
+              href={social.href}
+              key={index}
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
       </div>
-    </header>
+    </div>
+  );
+};
+
+interface HeaderMobileProps extends HeaderDesktopProps {
+  isNavOpen: boolean;
+  setIsNavOpen: (isNavOpen: boolean) => void;
+}
+
+const HeaderMobile = ({
+  navigation,
+  contacts,
+  socials,
+  isNavOpen,
+  setIsNavOpen,
+}: HeaderMobileProps) => {
+  return (
+    <div className='header__wrapper wrapper'>
+      <div className='header__logo-container'>
+        <img className='header__logo' src={logo} />
+      </div>
+      <div
+        className={`header__burger ${isNavOpen ? '--open' : ''}`}
+        onClick={() => {
+          setIsNavOpen(!isNavOpen);
+        }}
+      >
+        <span className='header__burger-line header__burger-line_1'></span>
+        <span className='header__burger-line header__burger-line_2'></span>
+        <span className='header__burger-line header__burger-line_3'></span>
+      </div>
+      <div
+        className={`header__menu_mob ${isNavOpen ? '--open' : ''}`}
+        onClick={() => {
+          setIsNavOpen(false);
+        }}
+      >
+        <nav className='header__navigation'>
+          {navigation.map((nav, index) => (
+            <a className='header__navigation-item' href={nav.href} key={index}>
+              {nav.name}
+            </a>
+          ))}
+        </nav>
+        <div className='header__contacts'>
+          {contacts.map((contact, index) => (
+            <a
+              className='header__contacts-item'
+              href={contact.href}
+              key={index}
+            >
+              {contact.name}
+            </a>
+          ))}
+        </div>
+        <div className='header__socials'>
+          {socials.map((social, index) => (
+            <a
+              className='header__socials-logo-container'
+              href={social.href}
+              key={index}
+            >
+              {social.icon}
+            </a>
+          ))}
+        </div>
+      </div>
+      <div
+        className='header__overlay'
+        onClick={() => {
+          setIsNavOpen(false);
+        }}
+      />
+    </div>
   );
 };
 
@@ -366,7 +485,7 @@ interface IntroProps {
 const Intro = ({ header, images }: IntroProps) => {
   const [offsetX, setOffsetX] = useState(0);
   const handleScroll = () => {
-    setOffsetX(window.scrollY);
+    setOffsetX(window.pageYOffset);
   };
 
   useEffect(() => {
@@ -374,6 +493,8 @@ const Intro = ({ header, images }: IntroProps) => {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const windowWidth = useWindowWidth();
 
   return (
     <section className='intro'>
@@ -407,9 +528,17 @@ const Intro = ({ header, images }: IntroProps) => {
               key={index}
               alt={image.alt}
               style={{
-                transform: `translateX(${
-                  index == 0 ? offsetX * 0.03 : index == 2 ? -offsetX * 0.12 : 0
-                }px)`,
+                transform: `${
+                  windowWidth && windowWidth >= 620
+                    ? `translateX(${
+                        index == 0
+                          ? offsetX * 0.03
+                          : index == 2
+                          ? -offsetX * 0.12
+                          : 0
+                      }px`
+                    : `translateY(${index * offsetX * 0.04}px`
+                }`,
               }}
             />
           ))}
@@ -432,17 +561,83 @@ const Promo = ({ images }: PromoProps) => {
     <section className='promo'>
       <div className='promo__wrapper wrapper'>
         {images.map((image, index) => (
-          <a className='promo__image-container' href={image.href}>
-            <img
-              className='promo__image'
-              src={image.image}
-              key={index}
-              alt={image.alt}
-            />
-          </a>
+          <PromoItem key={index} image={image} index={index} />
         ))}
       </div>
     </section>
+  );
+};
+
+interface PromoItemProps {
+  image: {
+    image: string;
+    alt: string;
+    href: string;
+  };
+  index: number;
+}
+
+const PromoItem = ({ image, index }: PromoItemProps) => {
+  const [contentIsOpen, setContentIsOpen] = useState(false);
+  const [isAnimated, setIsAnimated] = useState<undefined | boolean>();
+
+  const animRef = useRef<HTMLAnchorElement>(null);
+  const windowWidth = useWindowWidth();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        setIsAnimated(true);
+      }
+    });
+    observer.observe(animRef.current!);
+  }, []);
+
+  return (
+    <a
+      className={`promo__image-container `}
+      href={image.href}
+      onClick={(e) => {
+        e.preventDefault();
+      }}
+      onMouseLeave={() => {
+        setContentIsOpen(false);
+      }}
+      ref={animRef}
+      key={index}
+      style={
+        isAnimated
+          ? {
+              transform: 'translateX(0)',
+              opacity: '1',
+            }
+          : {
+              transform: `${
+                index % 2 == 0
+                  ? `translateX(-${
+                      windowWidth && windowWidth >= 525 ? '500' : '280'
+                    }px)`
+                  : `translateX(${
+                      windowWidth && windowWidth >= 525 ? '500' : '280'
+                    }px)`
+              } `,
+              opacity: '0',
+            }
+      }
+    >
+      <img className='promo__image' src={image.image} alt={image.alt} />
+      <div
+        className={`promo__content ${contentIsOpen ? '--active' : ''}`}
+        onClick={() => {
+          setContentIsOpen(!contentIsOpen);
+        }}
+      >
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores quis
+        eligendi, facere corrupti quidem provident, voluptatem illo ea, beatae
+        veniam quos vel expedita eveniet a eos quisquam laborum ullam alias!
+      </div>
+    </a>
   );
 };
 
@@ -454,13 +649,17 @@ interface SolutionsProps {
 }
 
 const Solutions = ({ solutions }: SolutionsProps) => {
+  const windowWidth = useWindowWidth();
+
   return (
     <section className='solutions'>
       <div className='solutions__wrapper wrapper'>
         <HeadOfBlock
           header={solutions.header}
           className='solutions'
-          apperance='horizontal'
+          apperance={
+            windowWidth && windowWidth >= 1030 ? `horizontal` : 'vertical'
+          }
         />
         <SolutionCards cards={solutions.cards} className='solutions' />
       </div>
@@ -490,13 +689,17 @@ const Procedure = ({ procedure }: ProcedureProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const windowWidth = useWindowWidth();
+
   return (
     <section className='procedure'>
       <div className='procedure__wrapper wrapper'>
         <HeadOfBlock
           header={procedure.header}
           className='procedure'
-          apperance='horizontal'
+          apperance={
+            windowWidth && windowWidth >= 1030 ? `horizontal` : 'vertical'
+          }
         />
         <ul
           className='procedure__list'
@@ -509,9 +712,29 @@ const Procedure = ({ procedure }: ProcedureProps) => {
               className='procedure__list-item'
               key={index}
               style={{
-                transform: `translateX(${-(index + 0.5) * 600}px) translateX(${
-                  offsetX * ((index + 0.5) * 0.1)
-                }px)`,
+                transform: `${
+                  windowWidth && windowWidth > 1440
+                    ? `translateX(${-(index + 0.5) * 540}px) translateX(${
+                        offsetX * ((index + 0.5) * 0.1)
+                      }px)`
+                    : windowWidth && windowWidth < 1440 && windowWidth > 1070
+                    ? `translateX(${-(index + 0.5) * 430}px) translateX(${
+                        offsetX * ((index + 0.5) * 0.06)
+                      }px)`
+                    : windowWidth && windowWidth <= 1069 && windowWidth > 501
+                    ? `translateX(${-(index + 0.5) * 375}px) translateX(${
+                        offsetX * ((index + 0.5) * 0.05)
+                      }px)`
+                    : windowWidth && windowWidth <= 501 && windowWidth > 426
+                    ? `translateX(${-(index + 0.5) * 360}px) translateX(${
+                        offsetX * ((index + 0.5) * 0.05)
+                      }px)`
+                    : windowWidth && windowWidth <= 425 && windowWidth > 320
+                    ? `translateX(${-(index + 0.5) * 350}px) translateX(${
+                        offsetX * ((index + 0.5) * 0.05)
+                      }px)`
+                    : 0
+                } `,
               }}
             >
               <span className='procedure__list-item_number'>{l.id}</span>
@@ -539,7 +762,6 @@ const About = ({ about }: AboutProps) => {
   const handleMove = (e: { clientX: number; clientY: number }) => {
     setPositionX(e.clientX / window.innerWidth);
     setPositionY(e.clientY / window.innerHeight);
-    console.log(positionX);
   };
 
   useEffect(() => {
@@ -547,6 +769,8 @@ const About = ({ about }: AboutProps) => {
 
     return () => window.removeEventListener('mousemove', handleMove);
   }, []);
+
+  const windowWidth = useWindowWidth();
 
   return (
     <section className='about'>
@@ -771,6 +995,7 @@ const App = () => {
       <Contacts header={data.contacts.header} contact={data.contacts.contact} />
       <Links links={data.links} />
       <Copyright />
+      <Popup />
     </div>
   );
 };
