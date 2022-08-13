@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
 import { CardsProps } from '../../types/types';
 
 interface SolutionCardsProps {
@@ -28,13 +29,15 @@ const SolutionCards = ({ cards, className }: SolutionCardsProps) => {
     >
       {cards.map((card, index) => (
         <div
-          className={`${className ? `${className}__card` : ''} card ${
-            isAnimated ? `--animated` : ''
-          }`}
+          className={`${className ? `${className}__card` : ''} card`}
           style={
             isAnimated
-              ? { transitionDelay: `${index * 0.4}s` }
-              : { transitionDelay: '0s' }
+              ? {
+                  transform: 'scale(1)',
+                  opacity: '1',
+                  transitionDelay: `${index * 0.7}s`,
+                }
+              : { transform: 'scale(0.3)', opacity: '0' }
           }
           key={index}
         >
