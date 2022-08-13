@@ -802,13 +802,17 @@ interface QuestionsProps {
 }
 
 const Questions = ({ questions }: QuestionsProps) => {
+  const windowWidth = useWindowWidth();
+
   return (
     <section className='questions'>
       <div className='questions__wrapper wrapper'>
         <HeadOfBlock
           header={questions.header}
           className='questions'
-          apperance='horizontal'
+          apperance={
+            windowWidth && windowWidth >= 1030 ? `horizontal` : 'vertical'
+          }
           color='dark'
         />
         <div className='questions__container'>
@@ -828,6 +832,21 @@ interface ClientsProps {
 }
 
 const Clients = ({ header, logos }: ClientsProps) => {
+  const [isAnimated, setIsAnimated] = useState<undefined | boolean>();
+
+  const animRef = useRef<HTMLDivElement>(null);
+  const windowWidth = useWindowWidth();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        setIsAnimated(true);
+      }
+    });
+    observer.observe(animRef.current!);
+  }, []);
+
   return (
     <section className='clients'>
       <div className='clients__wrapper wrapper'>
@@ -838,9 +857,25 @@ const Clients = ({ header, logos }: ClientsProps) => {
             apperance='vertical'
             color='light'
           />
-          <div className='clients__logos'>
+          <div className={'clients__logos'} ref={animRef}>
             {logos.map((logo, index) => (
-              <a href={logo.href} className='clients__logo-link' key={index}>
+              <a
+                href={logo.href}
+                className='clients__logo-link'
+                key={index}
+                style={
+                  isAnimated
+                    ? {
+                        transform: 'translateY(0)',
+                        opacity: '1',
+                        transitionDelay: `${index * 0.5}s`,
+                      }
+                    : {
+                        transform: `translateY(-50px)`,
+                        opacity: '0',
+                      }
+                }
+              >
                 {logo.logo}
               </a>
             ))}

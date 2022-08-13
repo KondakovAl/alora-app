@@ -541,7 +541,7 @@ body {
       overflow: hidden;
       z-index: 5;
       opacity: 0;
-      transition: transform 1s ease, opacity 0.5s ease-in;
+      transition: transform 1.5s ease, opacity 0.5s ease-in;
       &:nth-child(2n) {
         margin-top: -160px;
       }
@@ -827,9 +827,20 @@ body {
   @media (max-width: 500px) {
     padding: 60px 0;
   }
-
+  &__wrapper {
+    @media (max-width: 1250px) {
+      max-width: calc(100% - 50px);
+    }
+  }
   .head {
-    margin-bottom: 55px;
+    margin: 0 0 55px;
+    max-width: 100%;
+    @media (max-width: 500px) {
+      margin: 0 0 40px;
+    }
+    &__subtitle {
+      padding-right: 10px;
+    }
   }
 }
 
@@ -844,18 +855,32 @@ body {
   &__wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 50px;
+    @media (max-width: 1250px) {
+      max-width: calc(100% - 50px);
+      flex-direction: column;
+    }
   }
   &__logos {
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 595px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
     margin-bottom: 30px;
   }
   &__logo-link {
     padding: 22px;
     border-top: 1px solid $light-color;
     border-left: 1px solid $light-color;
+    transition: transform 0.8s ease, opacity 0.5s ease-in;
+    @media (max-width: 595px) {
+      border: none;
+      flex: 1;
+    }
     &:nth-child(-n + 3) {
       border-top: none;
     }
@@ -863,6 +888,7 @@ body {
     &:nth-child(3n + 1) {
       border-left: none;
     }
+
     width: 100%;
     height: 100%;
     display: flex;
@@ -880,6 +906,9 @@ body {
     display: flex;
     flex-direction: column;
     max-width: 575px;
+    @media (max-width: 1250px) {
+      max-width: 100%;
+    }
   }
   &__text {
     font-size: 18px;
@@ -898,21 +927,35 @@ body {
     &-container {
       width: 575px;
       height: 800px;
+      @media (max-width: 1250px) {
+        width: 100%;
+        height: fit-content;
+      }
+      @media (max-width: 520px) {
+        height: 265px;
+      }
     }
   }
   .head {
     margin-bottom: 50px;
+    max-width: 100%;
   }
 }
 
 /*Contacts Section*/
 
 .contacts {
-  padding: 130px 0 50px;
+  padding: 120px 0 50px;
   background: $bg-color;
+  @media (max-width: 500px) {
+    padding: 60px 0 30px;
+  }
   &__wrapper {
     display: flex;
     flex-direction: column;
+    @media (max-width: 1250px) {
+      max-width: calc(100% - 50px);
+    }
   }
   &__container {
     display: grid;
@@ -920,6 +963,20 @@ body {
     grid-template-rows: repeat(2, auto);
     grid-column-gap: 70px;
     grid-row-gap: 30px;
+    @media (max-width: 1250px) {
+      max-width: calc(100% - 35px);
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      max-width: calc(90%);
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 500px) {
+      max-width: calc(95%);
+      display: flex;
+      flex-direction: column;
+    }
   }
   &__contact {
     &:nth-child(1) {
@@ -934,6 +991,13 @@ body {
   }
   .head {
     margin-bottom: 85px;
+    @media (max-width: 1250px) {
+      margin: 0 0 55px;
+      max-width: 100%;
+    }
+    &__subtitle {
+      padding-right: 10px;
+    }
     & .head__description {
       margin: 0;
     }
@@ -946,6 +1010,9 @@ body {
   flex-direction: column;
   background-color: $color-purple_other;
   padding: 40px 40px 45px;
+  @media (max-width: 500px) {
+    padding: 35px;
+  }
 
   &__number {
     position: absolute;
@@ -1013,11 +1080,17 @@ body {
 
 .links {
   padding: 50px 0;
+  @media (max-width: 500px) {
+    padding: 30px 0;
+  }
   background: $bg-color;
   &__wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media (max-width: 700px) {
+      max-width: calc(100% - 50px);
+    }
   }
   &__title {
     font-family: $font-stack-secondary;
@@ -1034,15 +1107,24 @@ body {
     &:last-child {
       display: none;
     }
+    @media (max-width: 625px) {
+      display: none;
+    }
   }
   &__navigation {
     position: relative;
     display: flex;
     gap: 10px;
     align-items: center;
+    justify-content: center;
     margin: 0 0 15px;
     font-size: 20px;
     line-height: 30px;
+    @media (max-width: 625px) {
+      flex-wrap: wrap;
+      margin: 0;
+      gap: 0;
+    }
     &-item {
       position: relative;
       padding: 10px 15px;
@@ -1070,9 +1152,15 @@ body {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     font-size: 20px;
     line-height: 30px;
+    @media (max-width: 625px) {
+      flex-wrap: wrap;
+      margin: 0;
+      gap: 0;
+    }
     &-item {
       position: relative;
       padding: 10px 15px;

@@ -34,15 +34,25 @@
     height: 5px;
     width: 100%;
     background-color: $light-color;
+    border-top: 1px solid $primary-color;
     &-bar {
-      width: 35%;
+      transition: width 0.3s ease;
+      width: 0%;
       height: 100%;
-      background-color: $color-error;
+      background-color: $color-purple_dark;
+
+      animation: close 5s ease-in forwards;
     }
   }
   &.--closed {
     opacity: 0;
     pointer-events: none;
     user-select: none;
+  }
+}
+
+@keyframes close {
+  to {
+    width: 100%;
   }
 }

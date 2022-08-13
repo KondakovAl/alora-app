@@ -3,6 +3,10 @@
     display: flex;
     border-bottom: 1px solid #abb9ca;
     margin-bottom: 20px;
+    @media (max-width: 520px) {
+      flex-direction: column;
+      border: none;
+    }
     &-item {
       position: relative;
       overflow: hidden;
@@ -14,6 +18,9 @@
       line-height: 20px;
       letter-spacing: 2px;
       cursor: pointer;
+      @media (max-width: 520px) {
+        border-bottom: 1px solid #abb9ca;
+      }
       &::after {
         content: '';
         position: absolute;
@@ -39,9 +46,12 @@
 .faq {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
   gap: 25px 20px;
   &__item {
-    z-index: 1;
+    z-index: 20;
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
@@ -58,6 +68,37 @@
         }
         &__answer {
           height: 100px;
+
+          @media (max-width: 1770px) {
+            height: fit-content;
+          }
+          @media (max-width: 1024px) {
+            height: 75px;
+          }
+          @media (max-width: 779px) {
+            height: 100px;
+          }
+          @media (max-width: 600px) {
+            height: 125px;
+          }
+          @media (max-width: 507px) {
+            height: 150px;
+          }
+          @media (max-width: 453px) {
+            height: 175px;
+          }
+          @media (max-width: 402px) {
+            height: 200px;
+          }
+          @media (max-width: 364px) {
+            height: 225px;
+          }
+          @media (max-width: 354px) {
+            height: 250px;
+          }
+          @media (max-width: 323px) {
+            height: fit-content;
+          }
           opacity: 1;
           cursor: inherit;
         }

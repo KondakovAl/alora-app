@@ -33,7 +33,7 @@ const SolutionCards = ({ cards, className }: SolutionCardsProps) => {
           }`}
           style={
             isAnimated
-              ? { transitionDelay: `${index * 0.5}s` }
+              ? { transitionDelay: `${index * 0.4}s` }
               : { transitionDelay: '0s' }
           }
           key={index}

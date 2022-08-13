@@ -2,25 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 const Popup = () => {
   const [isClosed, setIsclosed] = useState(false);
-  const [progress, setProgress] = useState(0);
 
-  const inceaseProgress = () => {
-    setProgress(progress + 10);
-  };
-
-  //   useEffect(() => {
-  //     const timer = setTimeout(() => {
-  //       if (progress <= 100) {
-  //         inceaseProgress();
-  //       }
-  //     }, 500);
-
-  //     return () => {
-  //       if (progress == 100) {
-  //         clearTimeout(timer);
-  //       }
-  //     };
-  //   }, [progress]);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsclosed(true);
+    }, 5000);
+  }, []);
 
   return (
     <div className={`popup ${isClosed ? '--closed' : ''}`}>
@@ -34,10 +21,7 @@ const Popup = () => {
       </button>
       <p className='popup__text'>scroll down slowly</p>
       <div className='popup__progress'>
-        <div
-          className='popup__progress-bar'
-          style={{ width: `${progress}%` }}
-        ></div>
+        <div className='popup__progress-bar'></div>
       </div>
     </div>
   );

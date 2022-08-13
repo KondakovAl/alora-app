@@ -5,13 +5,12 @@
   margin: 25px 0 0;
 
   &-submited {
-    margin: 55px 0 0;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: $light-color;
     transition: min-height 0.3s ease-in;
-    animation: form 0.7s ease-in-out;
     &__title {
       margin-bottom: 20px;
       font-size: 35px;
@@ -26,14 +25,5 @@
     &__button {
       color: $primary-color;
     }
-  }
-}
-
-@keyframes form {
-  0% {
-    margin-bottom: 250px;
-  }
-  100% {
-    margin-bottom: 0px;
   }
 }
